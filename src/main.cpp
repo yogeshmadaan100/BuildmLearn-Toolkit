@@ -214,7 +214,9 @@ int main(int argc, char *argv[]) {
     QObject::connect(application.trayIcon(), SIGNAL(leftMouseClicked()),
                      &main_form, SLOT(switchVisibility()));
     application.trayIcon()->setContextMenu(main_form.trayMenu());
+    application.trayIcon()->geometry().adjust(50,50,50,50);
     application.trayIcon()->show();
+
 
     QTimer::singleShot(STARTUP_UPDATE_DELAY, &application,
                        SLOT(checkForUpdatesOnBackground()));

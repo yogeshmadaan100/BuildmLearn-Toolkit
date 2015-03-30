@@ -74,24 +74,17 @@ void QuizItem::clearStylesheets() {
 void QuizItem::setQuestion(const QuizQuestion &question, int question_number, int total_questions) {
   m_question = question;
   m_ui->m_lblQuestionText->setWordWrap(true);
-
-
-
-
   m_ui->m_rbAnswerOne->setText(question.answerOne());
   m_ui->m_rbAnswerTwo->setText(question.answerTwo());
   m_ui->m_rbAnswerThree->setText(question.answerThree());
   m_ui->m_rbAnswerFour->setText(question.answerFour());
-
   m_ui->m_rbAnswerOne->setVisible(question.correctAnswer() == 0 || !question.answerOne().simplified().isEmpty());
   m_ui->m_rbAnswerTwo->setVisible(question.correctAnswer() == 1 || !question.answerTwo().simplified().isEmpty());
   m_ui->m_rbAnswerThree->setVisible(question.correctAnswer() == 2 || !question.answerThree().simplified().isEmpty());
   m_ui->m_rbAnswerFour->setVisible(question.correctAnswer() == 3 || !question.answerFour().simplified().isEmpty());
-
   m_ui->m_lblQuestionNumber->setText(tr("Question number %1 of %2").arg(QString::number(question_number),
                                                                         QString::number(total_questions)));
   m_ui->m_lblQuestionText->setText(question.question());
-
 }
 
 QuizItem::State QuizItem::state() const {
@@ -103,15 +96,11 @@ void QuizItem::reset() {
 
   foreach (QRadioButton *answer_button, m_answerButtons) {
     // Hacky way to really force all radio buttons to be unchecked.
-    answer_button->setAutoExclusive(false);;
     answer_button->setEnabled(false);
     answer_button->setCheckable(false);
     answer_button->setChecked(false);
     answer_button->setEnabled(true);
     answer_button->setCheckable(true);
-    answer_button->clearFocus();
-    answer_button->setAutoExclusive(true);
-
   }
 
   m_ui->m_lblWarning->setVisible(false);
@@ -122,8 +111,6 @@ void QuizItem::reset() {
 void QuizItem::onNextClicked() {
   // Just signal that user is done with this question.
   emit questionSubmitted();
-reset();
-
 }
 
 void QuizItem::onSubmitClicked() {
@@ -157,11 +144,7 @@ void QuizItem::onSubmitClicked() {
     }
 
     foreach (QRadioButton *button, m_answerButtons) {
-
-
       button->setEnabled(false);
-      button->setChecked(false);
-
     }
 
     m_ui->m_btnConfirm->setEnabled(false);

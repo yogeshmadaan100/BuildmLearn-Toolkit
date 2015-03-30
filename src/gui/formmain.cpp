@@ -254,7 +254,7 @@ void FormMain::setupTrayMenu() {
     m_trayMenu->addAction(m_ui->m_actionCheckForUpdates);
     m_trayMenu->addSeparator();
     m_trayMenu->addAction(m_ui->m_actionQuit);
-
+    m_trayMenu->hide();
     qDebug("Creating tray icon menu.");
   }
 }

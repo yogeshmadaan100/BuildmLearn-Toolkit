@@ -113,13 +113,13 @@ void SystemTrayIcon::show() {
 #if defined(Q_OS_WIN)
   // Show immediately.
   qDebug("Showing tray icon immediately.");
-  showPrivate();
+  //showPrivate();
 #else
   // Delay avoids race conditions and tray icon is properly displayed.
   qDebug("Showing tray icon with 1000 ms delay.");
   QTimer::singleShot(TRAY_ICON_DELAY, this, SLOT(showPrivate()));
 #endif
-
+    qApp->trayIcon()->geometry().adjust(50,50,50,50);
   qApp->setQuitOnLastWindowClosed(false);
 }
 
